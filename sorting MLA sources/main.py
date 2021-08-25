@@ -1,15 +1,18 @@
-import os
+from os import listdir
+from os.path import isfile, join
 import csv
 
+PATH = '.\sorting MLA sources'
 
-files = [f for f in os.listdir('.') if os.path.isfile(f)]
+files = [f for f in listdir(PATH) if isfile(join(PATH, f))]
+
 csv_files_folder = []
-
+print(f"{files}")
 
 for f in files:
-    if(f[-4:len(f)] == ".csv"):
+    print(f"{f[-4:len(f)]}")
+    if(f[-4:len(f)] == '.csv'):
         csv_files_folder.append(f)
-
 
 if(len(csv_files_folder) > 1):
     print("please choose a number for the correct csv file\n")
@@ -32,12 +35,16 @@ else:
 print(f'{file}')
 
 #This section is incomplete check documentation for csv
-with open(file) as csv_file:
-    csv_reader = csv_reader(csv_file, delimiter = '\t')
+with open(join(PATH, file), newline='') as csvfile:
+    csv_reader = csv.reader(csvfile, delimiter = '\t')
     line_count = 0
-    
+    for row in csv_reader:
+        print(f'{row}\t')    
+
+exit()
 
 """
+
     Alternative to get number from input
 
     NOTE: this code is purelly to avoid typos and missclicks, however givving a higher/different number than requested will still return an error
